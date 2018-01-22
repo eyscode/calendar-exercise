@@ -1,10 +1,10 @@
-let defaultState = {
+let defaultStateCalendar = {
     beginDate: null,
     totalDays: null,
     countryCode: null
 };
 
-function calendar(state = defaultState, action) {
+export function calendar(state = defaultStateCalendar, action) {
     switch (action.type) {
         case "SHOW_CALENDAR":
             return {
@@ -16,11 +16,50 @@ function calendar(state = defaultState, action) {
         case "CLEAR_CALENDAR":
             return {
                 ...state,
-                ...defaultState
+                ...defaultStateCalendar
             };
         default:
             return state
     }
 }
 
-export default calendar;
+export function holidays(state = {}, action) {
+    switch (action.type) {
+        case "LOAD_HOLIDAYS":
+            if (state[action.data.countryCode]) {
+                if (state[action.data.countryCode][action.data.year]) {
+                    return {
+                        ...state,
+                        [action.data.countryCode]: {
+                            ...state[action.data.countryCode],
+                            [action.data.year]: {
+                                ...state[action.data.countryCode][action.data.year],
+                                [action.data.month]: action.data.holidays
+                            }
+                        }
+                    }
+                } else {
+                    return {
+                        ...state,
+                        [action.data.countryCode]: {
+                            ...state[action.data.countryCode],
+                            [action.data.year]: {
+                                [action.data.month]: action.data.holidays
+                            }
+                        }
+                    }
+                }
+            } else {
+                return {
+                    ...state,
+                    [action.data.countryCode]: {
+                        [action.data.year]: {
+                            [action.data.month]: action.data.holidays
+                        }
+                    }
+                }
+            }
+        default:
+            return state
+    }
+}

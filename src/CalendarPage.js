@@ -3,6 +3,11 @@ import './Calendar.css';
 
 class CalendarPage extends Component {
 
+    componentDidMount(){
+        const {countryCode, month, year} = this.props;
+        this.props.fetchHolidays({countryCode, month, year});
+    }
+
     getDays(beginWeekDay, totalDays, beginDay, totalDaysInMonth) {
         totalDays = totalDays || totalDaysInMonth - beginDay + 1;
         const totalWeeks = Math.ceil((totalDays + beginWeekDay) / 7);
@@ -34,7 +39,7 @@ class CalendarPage extends Component {
     }
 
     render() {
-        const {totalDays, month, year} = this.props;
+        const {totalDays, month, year, holidays} = this.props;
         let {beginDay = 1, } = this.props;
         beginDay = beginDay || 1;
         const totalDaysInMonth = new Date(year, month + 1, 0).getDate();

@@ -3,11 +3,12 @@ import Calendar from './Calendar';
 import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux'
-import {showCalendar, clearCalendar} from './actions'
+import {showCalendar, clearCalendar, fetchHolidays} from './actions'
 
 class App extends Component {
     render() {
-        const {beginDate, totalDays, countryCode}= this.props;
+        const {beginDate, totalDays, countryCode, holidays} = this.props;
+        console.log(holidays);
         return (
             <div className="App">
                 <header className="App-header">
@@ -35,7 +36,9 @@ class App extends Component {
                     </div>
                     <button onClick={this.showCalendar.bind(this)}>SHOW</button>
                     <button onClick={this.clearCalendar.bind(this)}>CLEAR</button>
-                    {beginDate && <Calendar beginDate={beginDate} totalDays={totalDays} countrCode={countryCode}/>}
+                    {beginDate &&
+                    <Calendar beginDate={beginDate} totalDays={totalDays} countryCode={countryCode}
+                              fetchHolidays={this.props.fetchHolidays}/>}
                 </div>
             </div>
         );
@@ -49,7 +52,7 @@ class App extends Component {
         });
     }
 
-    clearCalendar(){
+    clearCalendar() {
         this.props.onClickClear();
         this.beginDateInput.value = '';
         this.totalDaysInput.value = '';
@@ -59,16 +62,18 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        beginDate: state.beginDate,
-        totalDays: state.totalDays,
-        countryCode: state.countryCode
+        beginDate: state.calendar.beginDate,
+        totalDays: state.calendar.totalDays,
+        countryCode: state.calendar.countryCode,
+        holidays: state.holidays
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onClickShow: data => dispatch(showCalendar(data)),
-        onClickClear: data => dispatch(clearCalendar())
+        onClickClear: data => dispatch(clearCalendar()),
+        fetchHolidays: data => dispatch(fetchHolidays(data))
     }
 };
 
