@@ -1,0 +1,50 @@
+.Calendar {
+    width: 260px;
+}
+
+.Calendar .Calendar-header h3 {
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+    background: #a7ffa3;
+    font-weight: normal;
+}
+
+.Calendar .Calendar-week {
+    overflow: hidden;
+}
+
+.Calendar .Calendar-week .Calendar-day {
+    float: left;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    font-size: 14px;
+    line-height: 14px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.Calendar .Calendar-week .Calendar-day.title {
+    font-size: 16px;
+}
+
+.Calendar .Calendar-week .Calendar-day div {
+    margin: 0 auto;
+}
+
+.Calendar .Calendar-week .Calendar-day.day-gray {
+    background: lightgray;
+}
+
+.Calendar .Calendar-week .Calendar-day.day-yellow {
+    background: yellow;
+}
+
+.Calendar .Calendar-week .Calendar-day.day-green {
+    background: lightgreen;
+}
