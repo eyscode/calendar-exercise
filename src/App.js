@@ -15,29 +15,35 @@ class App extends Component {
                     <h1 className="App-title">Number 8 - Programming Exercise</h1>
                 </header>
                 <div className="App-intro">
-                    <div>
-                        <label>Start date: </label>
-                        <input type="date" ref={(input) => {
-                            this.beginDateInput = input
-                        }}/>
+                    <div className="App-form">
+                        <div>
+                            <label>Start date: </label>
+                            <input type="date" ref={(input) => {
+                                this.beginDateInput = input
+                            }}/>
+                        </div>
+                        <div>
+                            <label>Number of days: </label>
+                            <input type="number" ref={(input) => {
+                                this.totalDaysInput = input
+                            }}/>
+                        </div>
+                        <div>
+                            <label>Country Code: </label>
+                            <input type="text" ref={(input) => {
+                                this.countryCodeInput = input
+                            }}/>
+                        </div>
+                        <div>
+                            <button onClick={this.showCalendar.bind(this)}>SHOW</button>
+                            <button onClick={this.clearCalendar.bind(this)}>CLEAR</button>
+                        </div>
                     </div>
-                    <div>
-                        <label>Number of days: </label>
-                        <input type="number" ref={(input) => {
-                            this.totalDaysInput = input
-                        }}/>
+                    <div className="App-results">
+                        {beginDate &&
+                        <Calendar beginDate={beginDate} totalDays={totalDays} countryCode={countryCode}
+                                  fetchHolidays={this.props.fetchHolidays} holidays={holidays}/>}
                     </div>
-                    <div>
-                        <label>Country Code: </label>
-                        <input type="text" ref={(input) => {
-                            this.countryCodeInput = input
-                        }}/>
-                    </div>
-                    <button onClick={this.showCalendar.bind(this)}>SHOW</button>
-                    <button onClick={this.clearCalendar.bind(this)}>CLEAR</button>
-                    {beginDate &&
-                    <Calendar beginDate={beginDate} totalDays={totalDays} countryCode={countryCode}
-                              fetchHolidays={this.props.fetchHolidays} holidays={holidays}/>}
                 </div>
             </div>
         );

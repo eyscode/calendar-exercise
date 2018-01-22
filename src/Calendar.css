@@ -1,5 +1,10 @@
 .Calendar {
-    width: 260px;
+    width: 258px;
+    margin: 0 auto 20px;
+    background: whitesmoke;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: solid 1px #d1d1d1;
 }
 
 .Calendar .Calendar-header h3 {
@@ -15,18 +20,26 @@
 
 .Calendar .Calendar-week {
     overflow: hidden;
+    margin-bottom: 1px;
+}
+
+.Calendar .Calendar-week:last-child {
+    margin-bottom: 0;
 }
 
 .Calendar .Calendar-week .Calendar-day {
     float: left;
     margin-right: 1px;
-    margin-bottom: 1px;
     font-size: 14px;
     line-height: 14px;
     width: 36px;
     height: 36px;
     display: flex;
     align-items: center;
+}
+
+.Calendar .Calendar-week .Calendar-day:last-child {
+    margin-right: 0;
 }
 
 .Calendar .Calendar-week .Calendar-day.title {

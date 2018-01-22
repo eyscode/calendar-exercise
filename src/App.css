@@ -11,6 +11,31 @@
   color: white;
 }
 
+.App-intro {
+  width: 400px;
+  margin: 20px auto;
+}
+
+.App-form {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.App-form div {
+    width: 290px;
+    margin: 0 auto 10px;
+}
+
+.App-form div label{
+  font-size: 14px;
+    width: 140px;
+    display: inline-block;
+}
+
+.App-form button {
+    margin-right: 10px;
+}
+
 .App-title {
   font-size: 1.5em;
 }
