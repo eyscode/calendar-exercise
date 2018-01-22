@@ -3,13 +3,16 @@ import './Calendar.css';
 
 class CalendarPage extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         const {countryCode, month, year} = this.props;
         this.props.fetchHolidays({countryCode, month, year});
     }
 
-    getDays(beginWeekDay, totalDays, beginDay, totalDaysInMonth) {
-        totalDays = totalDays || totalDaysInMonth - beginDay + 1;
+    getDays(beginWeekDay, beginDay, totalDaysInMonth) {
+        let {totalDays, holidays} = this.props;
+        if (!totalDays || (totalDays + beginWeekDay) > totalDaysInMonth) {
+            totalDays = (totalDaysInMonth - beginDay + 1)
+        }
         const totalWeeks = Math.ceil((totalDays + beginWeekDay) / 7);
         let pivotDay = beginDay - beginWeekDay;
         const weeks = [];
@@ -21,7 +24,9 @@ class CalendarPage extends Component {
                 if (within && (weekday === 0 || weekday === 6)) {
                     color = "yellow";
                 }
-                // TODO: Add holiday color
+                if (holidays[pivotDay]) {
+                    color = "orange";
+                }
                 days.push(
                     <div key={weekday} className={`Calendar-day day-${color}`}>
                         {within && <div>{pivotDay}</div>}
@@ -39,8 +44,8 @@ class CalendarPage extends Component {
     }
 
     render() {
-        const {totalDays, month, year, holidays} = this.props;
-        let {beginDay = 1, } = this.props;
+        const {month, year} = this.props;
+        let {beginDay = 1,} = this.props;
         beginDay = beginDay || 1;
         const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
         const beginWeekDay = new Date(year, month, beginDay).getDay();
@@ -71,7 +76,7 @@ class CalendarPage extends Component {
                     <h3>{`${months[month]} ${year}`}</h3>
                 </header>
                 <div className="Calendar-body">
-                    {this.getDays(beginWeekDay, totalDays, beginDay, totalDaysInMonth)}
+                    {this.getDays(beginWeekDay, beginDay, totalDaysInMonth)}
                 </div>
             </div>
         );

@@ -26,6 +26,11 @@ export function calendar(state = defaultStateCalendar, action) {
 export function holidays(state = {}, action) {
     switch (action.type) {
         case "LOAD_HOLIDAYS":
+            const holidaysMap = {};
+            action.data.holidays.forEach((holiday)=>{
+                const day = new Date(holiday.date).getUTCDate();
+                holidaysMap[day] = holiday;
+            });
             if (state[action.data.countryCode]) {
                 if (state[action.data.countryCode][action.data.year]) {
                     return {
@@ -34,7 +39,7 @@ export function holidays(state = {}, action) {
                             ...state[action.data.countryCode],
                             [action.data.year]: {
                                 ...state[action.data.countryCode][action.data.year],
-                                [action.data.month]: action.data.holidays
+                                [action.data.month]: holidaysMap
                             }
                         }
                     }
@@ -44,7 +49,7 @@ export function holidays(state = {}, action) {
                         [action.data.countryCode]: {
                             ...state[action.data.countryCode],
                             [action.data.year]: {
-                                [action.data.month]: action.data.holidays
+                                [action.data.month]: holidaysMap
                             }
                         }
                     }
@@ -54,7 +59,7 @@ export function holidays(state = {}, action) {
                     ...state,
                     [action.data.countryCode]: {
                         [action.data.year]: {
-                            [action.data.month]: action.data.holidays
+                            [action.data.month]: holidaysMap
                         }
                     }
                 }

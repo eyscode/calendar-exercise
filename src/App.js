@@ -8,7 +8,6 @@ import {showCalendar, clearCalendar, fetchHolidays} from './actions'
 class App extends Component {
     render() {
         const {beginDate, totalDays, countryCode, holidays} = this.props;
-        console.log(holidays);
         return (
             <div className="App">
                 <header className="App-header">
@@ -38,7 +37,7 @@ class App extends Component {
                     <button onClick={this.clearCalendar.bind(this)}>CLEAR</button>
                     {beginDate &&
                     <Calendar beginDate={beginDate} totalDays={totalDays} countryCode={countryCode}
-                              fetchHolidays={this.props.fetchHolidays}/>}
+                              fetchHolidays={this.props.fetchHolidays} holidays={holidays}/>}
                 </div>
             </div>
         );

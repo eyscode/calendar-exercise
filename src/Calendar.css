@@ -48,3 +48,7 @@
 .Calendar .Calendar-week .Calendar-day.day-green {
     background: lightgreen;
 }
+
+.Calendar .Calendar-week .Calendar-day.day-orange {
+    background: orange;
+}
