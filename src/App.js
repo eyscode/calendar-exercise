@@ -18,19 +18,19 @@ class App extends Component {
                     <div className="App-form">
                         <div>
                             <label>Start date: </label>
-                            <input type="date" ref={(input) => {
+                            <input placeholder="Example: 8/15/2008" type="date" ref={(input) => {
                                 this.beginDateInput = input
                             }}/>
                         </div>
                         <div>
                             <label>Number of days: </label>
-                            <input type="number" ref={(input) => {
+                            <input placeholder="Example: 30" type="number" ref={(input) => {
                                 this.totalDaysInput = input
                             }}/>
                         </div>
                         <div>
                             <label>Country Code: </label>
-                            <input type="text" ref={(input) => {
+                            <input placeholder="Example: US" type="text" ref={(input) => {
                                 this.countryCodeInput = input
                             }}/>
                         </div>
